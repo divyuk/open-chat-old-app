@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import crypto from "crypto";
-import { USER_TOKEN_EXPIRY } from "../../../../constants";
+import { USER_TOKEN_EXPIRY } from "../../../constants.js";
 const userSchema = new Schema(
   {
     avatar: {
@@ -12,38 +12,38 @@ const userSchema = new Schema(
         url: `https://via.placeholder.com/200x200.png`,
         localPath: "",
       },
-      username: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-        trim: true,
-        index: true, // allows you to specify that an index should be created for a particular field in your MongoDB collection. improved query performance when searching or sorting documents based on that field.
-      },
-      email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-        trim: true, //This will remove leading and trailing whitespace from the 'email' field.
-      },
-      // role:{
-      //     type:String,
-      //     required:true,
-      // },
-      password: {
-        type: String,
-        required: [true, "Password is required"],
-      },
-      refreshToken: {
-        type: String,
-      },
-      emailVerificationToken: {
-        type: String,
-      },
-      emailVerificationExpiry: {
-        type: Date,
-      },
+    },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+      index: true, // allows you to specify that an index should be created for a particular field in your MongoDB collection. improved query performance when searching or sorting documents based on that field.
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true, //This will remove leading and trailing whitespace from the 'email' field.
+    },
+    // role:{
+    //     type:String,
+    //     required:true,
+    // },
+    password: {
+      type: String,
+      required: [true, "Password is required"],
+    },
+    refreshToken: {
+      type: String,
+    },
+    emailVerificationToken: {
+      type: String,
+    },
+    emailVerificationExpiry: {
+      type: Date,
     },
   },
   { timestamps: true }

@@ -1,5 +1,7 @@
-import { ApiError } from "../../../utilis/ApiError";
-import { asyncHandler } from "../../../utilis/asyncHandler";
+import { ApiError } from "../../../utilis/ApiError.js";
+import { asyncHandler } from "../../../utilis/asyncHandler.js";
+import { User } from "../../../models/apps/auth/user.models.js";
+import { ApiResponse } from "../../../utilis/ApiResponse.js";
 
 const registerUser = asyncHandler(async (req, res) => {
   const { email, username, password, role } = req.body;
@@ -11,7 +13,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(409, "User with email or username already exists", []);
   }
 
-  const user = await User.Create({
+  const user = await User.create({
     email,
     password,
     username,
@@ -43,3 +45,5 @@ const registerUser = asyncHandler(async (req, res) => {
       )
     );
 });
+
+export { registerUser };

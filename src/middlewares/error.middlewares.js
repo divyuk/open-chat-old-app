@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { ApiError } from "../utilis/ApiError";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiError } from "../utilis/ApiError.js";
+import { asyncHandler } from "../utilis/asyncHandler.js";
 
 /**
  *
