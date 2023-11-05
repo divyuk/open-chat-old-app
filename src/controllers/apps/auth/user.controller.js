@@ -16,4 +16,30 @@ const registerUser = asyncHandler(async (req, res) => {
     password,
     username,
   });
+
+  const { hashedToken, tokenExpiry } = user.generateToken();
+  /**
+   * assign hashedToken and tokenExpiry in DB
+   */
+  user.emailVerificationToken = hashedToken;
+  user.emailVerificationExpiry = tokenExpiry;
+  await user.save({ validateBeforeSave: false });
+
+  const createdUser = await User.findById(user._id).select(
+    "-password -refreshToken -emailVerificationToken -emailVerificationExpiry"
+  );
+
+  if (!createdUser) {
+    throw new ApiError(500, "Something went wrong while registering the user");
+  }
+
+  return res
+    .status(201)
+    .json(
+      new ApiResponse(
+        200,
+        { user: createdUser },
+        "Users registered successfully."
+      )
+    );
 });
