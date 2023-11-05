@@ -42,3 +42,5 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 //!The timestamps option is one of these schema-level options, and it is used to automatically add "createdAt" and "updatedAt" fields to your documents. These fields will be automatically updated by Mongoose whenever a document is created or updated. It's clear that these options apply globally to the entire document, and Mongoose can interpret and process them correctly.
+
+export const User = mongoose.model("User", userSchema);
