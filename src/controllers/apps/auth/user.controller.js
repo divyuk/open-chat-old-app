@@ -1,3 +1,4 @@
+import { ApiError } from "../../../utilis/ApiError";
 import { asyncHandler } from "../../../utilis/asyncHandler";
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -7,5 +8,12 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (existedUser) {
+    throw new ApiError(409, "User with email or username already exists", []);
   }
+
+  const user = await User.Create({
+    email,
+    password,
+    username,
+  });
 });
